@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "run-p test:unit test:docs test:verify-examples",
+    "test": "run-s test:verify-examples test:unit test:docs ",
+    "test:verify-examples": "npx elm-verify-examples",
     "test:unit": "npx elm-test",
     "test:docs": "npx elm-doc-preview --output /dev/null",
-    "test:verify-examples": "npx elm-verify-examples",
     "dev:docs": "npx elm-doc-preview"
   },
   "repository": {

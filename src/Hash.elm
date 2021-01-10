@@ -101,6 +101,23 @@ dependent (Hash x) (Hash y) =
         |> Hash
 
 
+{-| -}
+allDependent : List Hash -> Hash
+allDependent hashes =
+    case hashes of
+        [] ->
+            fromString ""
+
+        only :: [] ->
+            only
+
+        first :: remaining ->
+            List.foldl
+                dependent
+                first
+                remaining
+
+
 {-| Combine two hash pairs such that the order does NOT matter.
 -}
 independent : Hash -> Hash -> Hash
@@ -112,3 +129,20 @@ independent hash1 hash2 =
 
             else
                 dependent hash2 hash1
+
+
+{-| -}
+allIndependent : List Hash -> Hash
+allIndependent hashes =
+    case hashes of
+        [] ->
+            fromString ""
+
+        only :: [] ->
+            only
+
+        first :: remaining ->
+            List.foldl
+                independent
+                first
+                remaining
